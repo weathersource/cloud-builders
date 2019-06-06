@@ -1,7 +1,7 @@
 # Go Builder
 
 This Container Builder build step runs the `go` tool. This is based on
-`gcr.io/cloud-builders/go`, but also installs OpenSSH to enable go get from
+`gcr.io/cloud-builders/go`, but also installs OpenSSH to enable `go get` from
 private repositories.
 
 ### Pulling from private repositories
