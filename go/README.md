@@ -1,5 +1,12 @@
 # Go Builder
 
+To build a new 'gcr.io/example-project/go' image:
+
+cd path/to/cloud-builders/go
+gcloud config set project wx-microservices
+gcloud builds submit --config=cloudbuild.yaml
+
+
 This Container Builder build step runs the `go` tool. This is based on
 `gcr.io/cloud-builders/go`, but also installs OpenSSH to enable `go get` from
 private repositories.
