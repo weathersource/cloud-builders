@@ -21,7 +21,7 @@ prepare_workspace() {
     if [[ "$GOPATH" ]]; then
         # We allow relative paths here because of how the Container Builder
         # service works. But, the Go tool does not allow relative paths. To
-        # accomodate the Go tool, we prepend the CWD to $GOPATH if $GOPATH is
+        # accommodate the Go tool, we prepend the CWD to $GOPATH if $GOPATH is
         # not absolute.
         if [[ "${GOPATH:0:1}" != '/' ]]; then
             export GOPATH="$PWD/$GOPATH"
