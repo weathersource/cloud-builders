@@ -1,0 +1,10 @@
+steps:
+  - name: "gcr.io/cloud-builders/go:debian"
+    args: ["install", "hello"]
+    env: ["GOPATH=."]
+  - name: "gcr.io/cloud-builders/go:debian"
+    args: ["test", "hello"]
+    env: ["GOPATH=."]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "--tag=gcr.io/$PROJECT_ID/hello", "."]
+images: ["gcr.io/$PROJECT_ID/hello"]

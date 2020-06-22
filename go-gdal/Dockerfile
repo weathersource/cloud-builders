@@ -1,7 +1,7 @@
-FROM golang:1.12-alpine
+FROM golang:1.12
 
-# Install VCS tools to support "go get" commands and install gcc.
-RUN apk add --update --no-cache git mercurial subversion build-base openssh
+# Install VCS tools to support "go get" commands and install .
+RUN apt-get update -qqy && apt-get install -qqy git mercurial subversion gcc openssh-server gdal-bin libgdal-dev
 
 # We blank out the GOPATH because the base image sets it, and
 # if the user of this build step does *not* set it, we want to
@@ -12,9 +12,9 @@ RUN mkdir /builder
 
 COPY go_workspace.go prepare_workspace.inc /builder/
 
-COPY go.ash /builder/bin/
+COPY go.bash /builder/bin/
 ENV PATH=/builder/bin:$PATH
 
 RUN go build -o /builder/go_workspace /builder/go_workspace.go
 
-ENTRYPOINT ["go.ash"]
+ENTRYPOINT ["go.bash"]

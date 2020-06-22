@@ -2,18 +2,15 @@
 # $ gcloud builds submit . --config=cloudbuild.yaml
 
 steps:
-  # Build the alpine and debian versions.
-  - id: build_alpine
-    name: "gcr.io/cloud-builders/docker"
-    args: ["build","-f","Dockerfile.alpine","--tag=gcr.io/$PROJECT_ID/go:alpine","."]
+  # Build the debian versions.
   - id: build_debian
     name: "gcr.io/cloud-builders/docker"
-    args: ["build","-f","Dockerfile.debian","--tag=gcr.io/$PROJECT_ID/go:debian","."]
+    args: ["build", "--tag=gcr.io/$PROJECT_ID/go-gdal:debian", "."]
 
-  # The alpine version is our default.
-  - id: alpine_default
+  # The debian version is our default.
+  - id: debian_default
     name: "gcr.io/cloud-builders/docker"
-    args: ["tag", "gcr.io/$PROJECT_ID/go:alpine", "gcr.io/$PROJECT_ID/go"]
+    args: ["tag", "gcr.io/$PROJECT_ID/go-gdal:debian", "gcr.io/$PROJECT_ID/go"]
 
   # log the golang version
   - id: go_version
@@ -112,23 +109,6 @@ steps:
     dir: "examples/nested_workspace"
 
   # examples/https_test
-  # with alpine/default
-  - id: https_alpine_install
-    name: "gcr.io/$PROJECT_ID/go:alpine"
-    args: ["install", "https_test"]
-    dir: "examples/https_test"
-  - id: https_alpine_build
-    name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-f", "Dockerfile.alpine", "--tag=https_test:alpine", "."]
-    dir: "examples/https_test"
-  - id: https_alpine_run
-    name: "gcr.io/cloud-builders/docker"
-    args: ["run", "https_test:alpine"]
-  # clear out the alpine binary.
-  - id: https_alpine_remove
-    name: "alpine"
-    args: ["rm", "gopath/bin/https_test"]
-    dir: "examples/https_test"
   # with debian
   - id: https_debian_install
     name: "gcr.io/$PROJECT_ID/go:debian"
@@ -136,13 +116,12 @@ steps:
     dir: "examples/https_test"
   - id: https_debian_build
     name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-f", "Dockerfile.ubuntu", "--tag=https_test:ubuntu", "."]
+    args: ["build", "--tag=https_test:debian", "."]
     dir: "examples/https_test"
   - id: https_debian_run
     name: "gcr.io/cloud-builders/docker"
-    args: ["run", "https_test:ubuntu"]
+    args: ["run", "https_test:debian"]
 
 images:
-  - "gcr.io/$PROJECT_ID/go"
-  - "gcr.io/$PROJECT_ID/go:alpine"
-  - "gcr.io/$PROJECT_ID/go:debian"
+  - "gcr.io/$PROJECT_ID/go-gdal"
+  - "gcr.io/$PROJECT_ID/go-gdal:debian"
