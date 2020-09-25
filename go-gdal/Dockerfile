@@ -1,4 +1,4 @@
-FROM golang:1.12
+FROM golang:1.14
 
 # Install VCS tools to support "go get" commands and install .
 RUN apt-get update -qqy && apt-get install -qqy git mercurial subversion gcc openssh-server gdal-bin libgdal-dev
