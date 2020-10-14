@@ -1,7 +1,7 @@
 FROM golang:1.14
 
 # Install VCS tools to support "go get" commands and install .
-RUN apt-get update -qqy && apt-get install -qqy git mercurial subversion gcc openssh-server
+RUN apt-get update -qqy && apt-get install -qqy git mercurial subversion gcc
 
 # We blank out the GOPATH because the base image sets it, and
 # if the user of this build step does *not* set it, we want to

@@ -1,0 +1,12 @@
+# In this directory, run the following command to build this builder.
+# $ gcloud builds submit . --config=cloudbuild.yaml
+
+steps:
+  # Build the debian versions.
+  - id: build_debian
+    name: "gcr.io/cloud-builders/docker"
+    args: ["build", "--tag=gcr.io/$PROJECT_ID/go-ssh-gdal:debian", "."]
+
+images:
+  - "gcr.io/$PROJECT_ID/go-ssh-gdal"
+  - "gcr.io/$PROJECT_ID/go-ssh-gdal:debian"
