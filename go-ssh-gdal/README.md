@@ -4,11 +4,9 @@ This builder creates a debian docker image - which playes nicer with the GDAL li
 
 To build a new 'gcr.io/example-project/go-ssh-gdal' image:
 
-cd path/to/cloud-builders/go-ssh-gdal
-
-gcloud config set project wx-microservices
-
-gcloud builds submit --config=cloudbuild.yaml
+    cd path/to/cloud-builders/go-ssh-gdal 
+    gcloud config set project wx-microservices 
+    gcloud builds submit --config=cloudbuild.yaml
 
 
 ### Pulling from private repositories
