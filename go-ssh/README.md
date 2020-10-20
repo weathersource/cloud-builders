@@ -4,9 +4,9 @@ This builder creates a alpine docker image - which is smaller in size than debia
 
 To build a new 'gcr.io/example-project/go-ssh' image:
 
-cd path/to/cloud-builders/go-ssh
-gcloud config set project wx-microservices
-gcloud builds submit --config=cloudbuild.yaml
+    cd path/to/cloud-builders/go-ssh 
+    gcloud config set project wx-microservices 
+    gcloud builds submit --config=cloudbuild.yaml 
 
 
 ### Pulling from private repositories
