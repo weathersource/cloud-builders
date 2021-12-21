@@ -1,0 +1,11 @@
+# In this directory, run the following command to build this builder.
+# $ gcloud builds submit . --config=cloudbuild.yaml
+
+steps:
+  # Build the debian versions.
+  - id: build_php
+    name: "gcr.io/cloud-builders/docker"
+    args: ["build", "--tag=gcr.io/$PROJECT_ID/php74-apache-grpc-redis", "."]
+
+images:
+  - "gcr.io/$PROJECT_ID/php74-apache-grpc-redis"
